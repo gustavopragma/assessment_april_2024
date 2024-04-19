@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: middleware-service
+services:
+  auth:
+    url: ${AUTH_SERVICE_URL}
+server:
+  port: ${SERVER_PORT}

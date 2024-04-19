@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tournament-app-service
+spec:
+  selector:
+    app: tournament-app
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tournament-app
+  labels:
+    app: tournament-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tournament-app
+  template:
+    metadata:
+      labels:
+        app: tournament-app
+    spec:
+      containers:
+      - name: tournament-app
+        image: gpinto/tournament-service:1.0.0
+        ports:
+        - containerPort: 8080
+        envFrom:
+          - configMapRef:
+              name: tournament-config-map

@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: notification-service
+  data:
+    mongodb:
+      host: ${DATABASE_HOST}
+      port: ${DATABASE_PORT}
+      database: ${DATABASE_DATABASE}
+      username: ${DATABASE_USERNAME}
+      password: ${DATABASE_PASSWORD}
+      authentication-database: ${DATABASE_AUTH}
+  rabbitmq:
+    host: ${RABBITMQ_HOST}
+    port: ${RABBITMQ_PORT}
+    password: ${RABBITMQ_USERNAME}
+    username: ${RABBITMQ_PASSWORD}
+server:
+  port: ${SERVER_PORT}
+services:
+  auth:
+    url: ${AUTH_SERVICE_URL}
+management:
+  tracing:
+    sampling:
+      probability: 1
+  zipkin:
+    tracing:
+      endpoint: ${ZIPKIN_URL}

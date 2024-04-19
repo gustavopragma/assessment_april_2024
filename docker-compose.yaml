@@ -1,0 +1,140 @@
+services:
+  auth-service:
+    container_name: auth-service
+    image: gpinto/auth-service:1.0.0
+    restart: on-failure
+    environment:
+      - DATABASE_URL=jdbc:postgresql://auth-service-db:5432/auth
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=postgres
+      - ZIPKIN_URL=http://zipkin:9411/api/v2/spans
+      - SERVER_PORT=8080 
+    ports:
+      - "8081:8080"
+    depends_on:
+      - auth-service-db
+      - zipkin
+  tournament-service:
+    container_name: tournament-service
+    image: gpinto/tournament-service:1.0.0
+    restart: on-failure
+    environment:
+      - DATABASE_URL=jdbc:postgresql://tournament-service-db:5432/tournament
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=postgres
+      - AUTH_SERVICE_URL=http://auth-service:8080/api/v1/auth
+      - ZIPKIN_URL=http://zipkin:9411/api/v2/spans
+      - SERVER_PORT=8080
+    ports:
+      - "8083:8080"
+    depends_on:
+      - tournament-service-db
+      - auth-service
+      - zipkin
+  middleware-service:
+    container_name: middleware-service
+    image: gpinto/middleware-service:1.0.0
+    restart: on-failure
+    environment:
+      - AUTH_SERVICE_URL=http://auth-service:8080/api/v1/auth
+      - SERVER_PORT=8080
+    ports:
+      - "8085:8080"
+    depends_on:
+      - auth-service
+  notification-service:
+    container_name: notification-service
+    image: gpinto/notification-service:1.0.0
+    restart: on-failure
+    environment:
+      - DATABASE_HOST=notification-service-db
+      - DATABASE_PORT=27017
+      - DATABASE_DATABASE=notifications
+      - DATABASE_USERNAME=mongo
+      - DATABASE_PASSWORD=password
+      - DATABASE_AUTH=admin
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USERNAME=guest
+      - RABBITMQ_PASSWORD=guest
+      - SERVER_PORT=8080
+      - AUTH_SERVICE_URL=http://auth-service:8080/api/v1/auth
+      - ZIPKIN_URL=http://zipkin:9411/api/v2/spans
+    ports:
+      - "8084:8080"
+    depends_on:
+      - auth-service
+      - ticket-service
+      - rabbitmq
+      - notification-service-db
+      - zipkin
+  ticket-service:
+    container_name: ticket-service
+    image: gpinto/ticket-service:1.0.0
+    restart: on-failure
+    environment:
+      - DATABASE_HOST=ticket-service-db
+      - DATABASE_PORT=27017
+      - DATABASE_DATABASE=tickets
+      - DATABASE_USERNAME=mongo
+      - DATABASE_PASSWORD=password
+      - DATABASE_AUTH=admin
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USERNAME=guest
+      - RABBITMQ_PASSWORD=guest
+      - SERVER_PORT=8080
+      - AUTH_SERVICE_URL=http://auth-service:8080/api/v1/auth
+      - ZIPKIN_URL=http://zipkin:9411/api/v2/spans
+    ports:
+      - "8082:8080"
+    depends_on:
+      - auth-service
+      - rabbitmq
+      - ticket-service-db
+      - zipkin
+  auth-service-db:
+    image: postgres
+    container_name: auth-service-db
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: auth
+    ports:
+      - "5432:5432"
+  tournament-service-db:
+    image: postgres
+    container_name: tournament-service-db
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: tournament
+    ports:
+      - "5433:5432"
+  ticket-service-db:
+    image: mongo
+    container_name: ticket-service-db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: tickets
+    ports:
+      - "27017:27017"
+  notification-service-db:
+    image: mongo
+    container_name: notification-service-db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: notifications
+    ports:
+      - "27018:27017"
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3.13.1-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  zipkin:
+    container_name: zipkin
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"

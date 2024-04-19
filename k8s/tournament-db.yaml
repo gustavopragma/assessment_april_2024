@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tournament-db-service
+spec:
+  selector:
+    app: tournament-db
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tournament-db
+  labels:
+    app: tournament-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tournament-db
+  template:
+    metadata:
+      labels:
+        app: tournament-db
+    spec:
+      containers:
+      - name: tournament-db
+        image: postgres
+        ports:
+        - containerPort: 5432
+        env:
+          - name: POSTGRES_PASSWORD
+            value: postgres
+          - name: POSTGRES_DB
+            value: tournament

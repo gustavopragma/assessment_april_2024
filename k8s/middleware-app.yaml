@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: middleware-app-service
+spec:
+  selector:
+    app: middleware-app
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: middleware-app
+  labels:
+    app: middleware-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: middleware-app
+  template:
+    metadata:
+      labels:
+        app: middleware-app
+    spec:
+      containers:
+      - name: middleware-app
+        image: gpinto/middleware-service:1.0.0
+        ports:
+        - containerPort: 8080
+        envFrom:
+          - configMapRef:
+              name: middleware-config-map

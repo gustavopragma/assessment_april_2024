@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: notification-app-service
+spec:
+  selector:
+    app: notification-app
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notification-app
+  labels:
+    app: notification-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notification-app
+  template:
+    metadata:
+      labels:
+        app: notification-app
+    spec:
+      containers:
+      - name: notification-app
+        image: gpinto/notification-service:1.0.0
+        ports:
+        - containerPort: 8080
+        envFrom:
+          - configMapRef:
+              name: notification-config-map

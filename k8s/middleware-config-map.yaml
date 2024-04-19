@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: middleware-config-map
+data:
+  AUTH_SERVICE_URL: http://auth-app-service:8080/api/v1/auth
+  SERVER_PORT: "8080"
