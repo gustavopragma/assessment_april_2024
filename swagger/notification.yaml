@@ -1,0 +1,112 @@
+openapi: 3.0.3
+info:
+  title: Notification Service 1.0
+  description: |-
+    This is an API to manage notifications 
+  contact:
+    email: gustavo.pinto@pragma.com.co
+  version: 1.0.0
+servers:
+  - url: http://localhost:8084/api/v1
+tags:
+  - name: Notifications
+    description: Everything about notifications
+paths:
+  /notifications:
+    get:
+      tags:
+        - Notifications
+      summary: Get notifications
+      description: Get notifications
+      operationId: Get notifications
+      parameters:
+        - in: query
+          name: tournamentId
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: ticketType
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NotificationResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Error'
+components:
+  schemas:
+    NotificationResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 6623fd70622bd16118c89c9b
+        ticketId:
+          type: string
+          example: 6623fd711c99e56fbea4b082
+        ticketType:
+          type: string
+          example: participant  
+        tournamentId:
+          type: string
+          example: 1
+        price:
+          type: number
+          example: 15000.0
+        createdAt:
+          type: string
+          example: 2024-04-20  
+    401Error:
+      type: object
+      properties:
+        status:
+          type: string
+          example: 401
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Invalid JWT
+    500Error:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2024-04-20T15:07:08.756+00:00
+        status:
+          type: number
+          example: 500
+        error:
+          type: string
+          example: error
+        path:
+          type: string
+          example: /api/v1/auth/register
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []

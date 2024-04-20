@@ -1,0 +1,144 @@
+openapi: 3.0.3
+info:
+  title: Authentication Service 1.0
+  description: |-
+    This is an API to authenticate users 
+  contact:
+    email: gustavo.pinto@pragma.com.co
+  version: 1.0.0
+servers:
+  - url: http://localhost:8081/api/v1/auth
+tags:
+  - name: authentication
+    description: Everything about authentication
+paths:
+  /login:
+    post:
+      tags:
+        - authentication
+      summary: Login a user
+      description: Login a user
+      operationId: loginUser
+      requestBody:
+        description: Login a user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginUser'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Error'    
+  /register:
+    post:
+      tags:
+        - authentication
+      summary: Register a new user
+      description: Register a new user
+      operationId: registerUser
+      requestBody:
+        description: Register a new user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterUser'
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Error'          
+components:
+  schemas:
+    TokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          example: eyJraWQiOiIxMjM0NTYiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI3ODY4ODI4Mi0yMjQzLTQ0N2ItODAwNi1jNDM1ZWY5ZDEwZGQiLCJ1c2VybmFtZSI6InRhdm8iLCJpYXQiOjE3MTM2NDQ1MjgsImV4cCI6MTcxMzY0ODEyOH0.ziLtHA5lgTe5g9kJAH4hOeDv1Bbl8NBiAOm06xj4nFkKn7ZewtfEODw6QTjb8tmQVJnXy3yL2hNXBahLKtrZEtRmRCIAMo860KLcDZDlbFiPZPRgohO2j5RAnUnA_TVNfSEo9PmuteWYHHfBKs3h5k-PfA47KYRUYvPE3rgey-8Sb90RRpvt8tZ3U6TbQNVFF0JYoINwpVl0Z-giRhh4Gjx6CTaUUt6Kwoc_6VrZLcThKub1ROrYCz6LdpW2x1vbS9_RejcyQhhxCBwZdtNpPzu7AYcKzgIjwgrt6Hkfpog2SfSoajUr7MrnRwyOKkOhDJKA7pTNwSyjraTMzjkY2g
+    LoginUser:
+      required:
+        - username
+        - password
+      type: object
+      properties:
+        username:
+          type: string
+          example: gpinto
+        password:
+          type: string
+          example: password
+    RegisterUser:
+      required:
+        - username
+        - password
+        - email
+      type: object
+      properties:
+        username:
+          type: string
+          example: gpinto
+        password:
+          type: string
+          example: password
+        email:
+          type: string
+          example: gpinto@email.com
+        firstName:
+          type: string
+          example: Gustavo
+        lastName:
+          type: string
+          example: Pinto
+        age:
+          type: number
+          example: 25
+    404Error:
+      type: object
+      properties:
+        status:
+          type: string
+          example: 404
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                example: User not found
+    500Error:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2024-04-20T15:07:08.756+00:00
+        status:
+          type: number
+          example: 500
+        error:
+          type: string
+          example: error
+        path:
+          type: string
+          example: /api/v1/auth/register

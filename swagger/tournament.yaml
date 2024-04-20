@@ -1,0 +1,556 @@
+openapi: 3.0.3
+info:
+  title: Tournament Service 1.0
+  description: |-
+    This is an API to manage tournaments 
+  contact:
+    email: gustavo.pinto@pragma.com.co
+  version: 1.0.0
+servers:
+  - url: http://localhost:8082/api/v1
+tags:
+  - name: Tournaments
+    description: Everything about participant tickets
+  - name: Categories
+    description: Everything about spectator tickets
+  - name: Videogames
+    description: Everything about clients
+  - name: Streamings
+    description: Everything about streamings
+paths:
+  /tournaments:
+    post:
+      tags:
+        - Tournaments
+      summary: Create a tournament
+      description: Create a tournament
+      operationId: Create a tournament
+      requestBody:
+        description: Create a tournament
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTournament'
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Error'
+  /tournaments/{tournamentId}:
+    get:
+      tags:
+        - Tournaments
+      summary: Get a tournament by id
+      description: Get a tournament by id
+      operationId: Get a tournament by id
+      parameters:
+        - in: path
+          name: tournamentId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TournamentResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Error'
+        '404':
+          description: No found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Error'
+  /tournaments/users/{ownerId}:
+    get:
+      tags:
+        - Tournaments
+      summary: Get user tournaments
+      description: Get user tournaments
+      operationId: Get user tournaments
+      parameters:
+        - in: path
+          name: ownerId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserTournamentResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Error'
+  /streamings:
+    post:
+      tags:
+        - Streamings
+      summary: Create a streaming
+      description: Create a streaming
+      operationId: Create a streaming
+      requestBody:
+        description: Create a streaming
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStreaming'
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Error'
+  /videogames:
+    get:
+      tags:
+        - Videogames
+      summary: Get videogames
+      description: Get videogames
+      operationId: Get videogames
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VideogameResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Error'
+    post:
+      tags:
+        - Videogames
+      summary: Create a category
+      description: Create a videogame
+      operationId: Create a videogame
+      requestBody:
+        description: Create a videogame
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateVideogame'
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Error'
+  /categories:
+    get:
+      tags:
+        - Categories
+      summary: Get categories
+      description: Get categories
+      operationId: Get categories
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CategoryResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Error'
+    post:
+      tags:
+        - Categories
+      summary: Create a category
+      description: Create a category
+      operationId: Create a category
+      requestBody:
+        description: Create a category
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCategory'
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Error'
+components:
+  schemas:
+    UserTournamentResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: cacc4abd-5c53-4590-b46c-0de35b45073f
+        name:
+          type: string
+          example: Tournament 1
+        participantsLimit:
+          type: number
+          example: 30  
+        presalePriceParticipant:
+          type: number
+          example: 20500
+        salePriceParticipant:
+          type: number
+          example: 25500
+        presalePriceSpectator:
+          type: number
+          example: 20500  
+        salePriceSpectator:
+          type: number
+          example: 25500
+        presaleParticipantEndDate:
+          type: string
+          example: 2024-05-05
+        presaleSpectatorEndDate:
+          type: string
+          example: 2024-05-20
+        createdAt:
+          type: string
+          example: 2024-05-10
+        ownerId:
+          type: string
+          example: 123456
+    StreamingResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 90de0b88-06b0-4181-8af5-379d077260c4
+        platform:
+          type: string
+          example: twitch
+        url:
+          type: string
+          example: www.twitch.com
+    VideogameResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: defbe2e9-9417-4f8a-a594-77f2f253bcb7
+        name:
+          type: string
+          example: Videogame 1
+        numberPlayers:
+          type: number
+          example: 2
+    TournamentResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: cacc4abd-5c53-4590-b46c-0de35b45073f
+        name:
+          type: string
+          example: Tournament 1
+        participantsLimit:
+          type: number
+          example: 30  
+        presalePriceParticipant:
+          type: number
+          example: 20500
+        salePriceParticipant:
+          type: number
+          example: 25500
+        presalePriceSpectator:
+          type: number
+          example: 20500  
+        salePriceSpectator:
+          type: number
+          example: 25500
+        presaleParticipantEndDate:
+          type: string
+          example: 2024-05-05
+        presaleSpectatorEndDate:
+          type: string
+          example: 2024-05-20
+        createdAt:
+          type: string
+          example: 2024-05-10
+        ownerId:
+          type: string
+          example: 123456
+        videogame:
+          $ref: '#/components/schemas/VideogameResponse'
+        category:
+          $ref: '#/components/schemas/CategoryResponse'
+        streamings:
+          type: array
+          items:
+            $ref: '#/components/schemas/StreamingResponse'
+    CreateTournament:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Tournament 1
+        participantsLimit:
+          type: number
+          example: 30  
+        presalePriceParticipant:
+          type: number
+          example: 20500
+        salePriceParticipant:
+          type: number
+          example: 25500
+        presalePriceSpectator:
+          type: number
+          example: 20500  
+        salePriceSpectator:
+          type: number
+          example: 25500
+        presaleParticipantEndDate:
+          type: string
+          example: 2024-05-05
+        presaleSpectatorEndDate:
+          type: string
+          example: 2024-05-20
+        ownerId:
+          type: string
+          example: 123456
+        videogameId:
+          type: string
+          example: d890f24b-cf65-4482-869a-b30c40d4347f
+        categoryId:
+          type: string
+          example: c518ea92-6463-4cb2-b8a3-f8181078905e
+    CreateStreaming:
+      required:
+        - platform
+        - url
+        - tournamentId
+      type: object
+      properties:
+        platform:
+          type: string
+          example: twitch
+        url:
+          type: string
+          example: www.twitch.com
+        tournamentId:
+          type: string
+          example: e4604548-3b36-4359-a00d-1a14f0872cd7  
+    CreateVideogame:
+      required:
+        - name
+        - numberPlayers
+      type: object
+      properties:
+        name:
+          type: string
+          example: Videogame 1
+        numberPlayers:
+          type: number
+          example: 2
+    CategoryResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: e55f2259-fbc0-4c60-a341-74db09a65b4d
+        name:
+          type: string
+          example: 1
+        isFree:
+          type: boolean
+          example: true
+        participantsLimit:
+          type: number
+          example: 30
+        spectatorsLimit:
+          type: number
+          example: 30
+        streamingLimit:
+          type: number
+          example: 30
+        commissionPercentage:
+          type: number
+          example: 20
+    IdResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 6623e0d4c176c639018f3e05
+    CreateCategory:
+      required:
+        - name
+        - isFree
+        - participantsLimit
+        - spectatorsLimit
+        - streamingLimit
+        - commissionPercentage
+      type: object
+      properties:
+        name:
+          type: string
+          example: 1
+        isFree:
+          type: boolean
+          example: true
+        participantsLimit:
+          type: number
+          example: 30
+        spectatorsLimit:
+          type: number
+          example: 30
+        streamingLimit:
+          type: number
+          example: 30
+        commissionPercentage:
+          type: number
+          example: 20
+    401Error:
+      type: object
+      properties:
+        status:
+          type: string
+          example: 401
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Invalid JWT
+    404Error:
+      type: object
+      properties:
+        status:
+          type: string
+          example: 404
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Not found
+    500Error:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2024-04-20T15:07:08.756+00:00
+        status:
+          type: number
+          example: 500
+        error:
+          type: string
+          example: error
+        path:
+          type: string
+          example: /api/v1/auth/register
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []

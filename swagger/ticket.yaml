@@ -1,0 +1,552 @@
+openapi: 3.0.3
+info:
+  title: Ticket Service 1.0
+  description: |-
+    This is an API to manage tickets 
+  contact:
+    email: gustavo.pinto@pragma.com.co
+  version: 1.0.0
+servers:
+  - url: http://localhost:8082/api/v1
+tags:
+  - name: Pariticipant tickets
+    description: Everything about participant tickets
+  - name: Spectator tickets
+    description: Everything about spectator tickets
+  - name: Clients
+    description: Everything about clients
+paths:
+  /participant-tickets:
+    post:
+      tags:
+        - Pariticipant tickets
+      summary: Create a participant ticket
+      description: Create a participant ticket
+      operationId: createParticipantTicket
+      requestBody:
+        description: Create a participant ticket
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateParticipantTicket'
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTicketResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Error'
+  /participant-tickets/{ticketId}:
+    get:
+      tags:
+        - Pariticipant tickets
+      summary: Get a participant ticket by id
+      description: Get a participant ticket by id
+      operationId: getParticipantTicket
+      parameters:
+        - name: ticketId
+          in: path
+          schema:
+            type: string
+            example: 6623e0d4c176c639018f3e05
+          required: true
+          description: Ticket id
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParticipantTicketResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Error'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Error'
+  /participant-tickets/total-sales/{tournamentId}:
+    get:
+      tags:
+        - Pariticipant tickets
+      summary: Get participant total sales
+      description: Get participant total sales
+      operationId: getParticipantTotalSales
+      parameters:
+        - name: tournamentId
+          in: path
+          schema:
+            type: string
+            example: 1
+          required: true
+          description: Tournament id
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TotalSalesResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Error'
+  /participant-tickets/total-participants/{tournamentId}:
+    get:
+      tags:
+        - Pariticipant tickets
+      summary: Get total participants
+      description: Get total participants
+      operationId: getTotalParticipants
+      parameters:
+        - name: tournamentId
+          in: path
+          schema:
+            type: string
+            example: 1
+          required: true
+          description: Tournament id
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TotalParticipantsResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Error'
+  /spectator-tickets:
+    post:
+      tags:
+        - Spectator tickets
+      summary: Create a spectator ticket
+      description: Create a spectator ticket
+      operationId: createSpectatorTicket
+      requestBody:
+        description: Create a spectator ticket
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSpectatorTicket'
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTicketResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Error'
+  /spectator-tickets/{ticketId}:
+    get:
+      tags:
+        - Spectator tickets
+      summary: Get a spectator ticket by id
+      description: Get a spectator ticket by id
+      operationId: getSpectatorTicket
+      parameters:
+        - name: ticketId
+          in: path
+          schema:
+            type: string
+            example: 6623e0d4c176c639018f3e05
+          required: true
+          description: Ticket id
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpectatorTicketResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Error'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Error'
+  /spectator-tickets/total-sales/{tournamentId}:
+    get:
+      tags:
+        - Spectator tickets
+      summary: Get spectator total sales
+      description: Get spectator total sales
+      operationId: getSpectatorTotalSales
+      parameters:
+        - name: tournamentId
+          in: path
+          schema:
+            type: string
+            example: 1
+          required: true
+          description: Tournament id
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TotalSalesResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Error'
+  /spectator-tickets/total-participants/{tournamentId}:
+    get:
+      tags:
+        - Spectator tickets
+      summary: Get total participants
+      description: Get total participants
+      operationId: getTotalSpectators
+      parameters:
+        - name: tournamentId
+          in: path
+          schema:
+            type: string
+            example: 1
+          required: true
+          description: Tournament id
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TotalParticipantsResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Error'
+  /clients:
+    post:
+      tags:
+        - Clients
+      summary: Create a client
+      description: Create a client
+      operationId: createClient
+      requestBody:
+        description: Create a client
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateClient'
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateClientResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Error'
+  /clients/{clientId}:
+    get:
+      tags:
+        - Clients
+      summary: Get a client by id
+      description: Get a client by id
+      operationId: getClient
+      parameters:
+        - name: clientId
+          in: path
+          schema:
+            type: string
+            example: 123
+          required: true
+          description: Client id
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Error'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Error'
+components:
+  schemas:
+    ClientResponse:
+      type: object
+      properties:
+        documentNumber:
+          type: string
+          example: 123
+        email:
+          type: string
+          example: gustavo@email.com
+        name:
+          type: string
+          example: Gustavo
+    CreateClientResponse:
+      type: object
+      properties:
+        documentNumber:
+          type: string
+          example: 123  
+    CreateClient:
+      required:
+        - documentNumber
+        - email
+        - name
+      type: object
+      properties:
+        documentNumber:
+          type: string
+          example: 123
+        email:
+          type: string
+          example: gustavo@email.com
+        name:
+          type: string
+          example: Gustavo  
+    SpectatorTicketResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 6623e0d4c176c639018f3e05
+        tournamentId:
+          type: string
+          example: 1
+        streamingId:
+          type: string
+          example: 22
+        clientId:
+          type: string
+          example: 129
+        price:
+          type: number
+          example: 15000.0
+        createdAt:
+          type: string
+          example: 2024-04-20
+    CreateSpectatorTicket:
+      required:
+        - tournamentId
+        - streamingId
+        - clientId
+        - price
+      type: object
+      properties:
+        tournamentId:
+          type: string
+          example: 1
+        streamingId:
+          type: string
+          example: 22
+        clientId:
+          type: string
+          example: 129
+        price:
+          type: number
+          example: 20000
+    TotalParticipantsResponse:
+      type: object
+      properties:
+        totalParticipants:
+          type: number
+          example: 10
+    TotalSalesResponse:
+      type: object
+      properties:
+        totalSales:
+          type: number
+          example: 15000.0
+    ParticipantTicketResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 6623e0d4c176c639018f3e05
+        tournamentId:
+          type: string
+          example: 1
+        clientId:
+          type: string
+          example: 129
+        price:
+          type: number
+          example: 15000.0
+        createdAt:
+          type: string
+          example: 2024-04-20
+    CreateTicketResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 6623e0d4c176c639018f3e05
+    CreateParticipantTicket:
+      required:
+        - tournamentId
+        - clientId
+        - price
+      type: object
+      properties:
+        tournamentId:
+          type: string
+          example: 1
+        clientId:
+          type: string
+          example: 129
+        price:
+          type: number
+          example: 15000
+    401Error:
+      type: object
+      properties:
+        status:
+          type: string
+          example: 401
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Invalid JWT
+    404Error:
+      type: object
+      properties:
+        status:
+          type: string
+          example: 404
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Not found
+    500Error:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2024-04-20T15:07:08.756+00:00
+        status:
+          type: number
+          example: 500
+        error:
+          type: string
+          example: error
+        path:
+          type: string
+          example: /api/v1/auth/register
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []
