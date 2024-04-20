@@ -67,9 +67,44 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/500Error'          
+                $ref: '#/components/schemas/500Error'
+  /jwk:
+    get:
+      tags:
+        - authentication
+      summary: Get JWK
+      description: Get JWK
+      operationId: getJWK
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JWKResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Error' 
 components:
   schemas:
+    JWKResponse:
+      type: object
+      properties:
+        kid:
+          type: string
+          example: 123456
+        kty:
+          type: string
+          example: RSA
+        n:
+          type: string
+          example: vCabtCToUHWRv3YFHF9Tc7njx4x17DjVPn0ZME6PcsqHDXxVYqFzBa_R7QUaw-woyrp2wpI_2
+        e:
+          type: string
+          example: AQAB
     TokenResponse:
       type: object
       properties:
