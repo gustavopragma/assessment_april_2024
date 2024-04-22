@@ -7,7 +7,7 @@ public class ClientResponseDTOMapper {
     public static ClientResponseDTO toDTO(Client client) {
         return ClientResponseDTO.builder()
                 .documentNumber(client.getDocumentNumber())
-                .email(client.getName())
+                .name(client.getName())
                 .email(client.getEmail())
                 .build();
     }
