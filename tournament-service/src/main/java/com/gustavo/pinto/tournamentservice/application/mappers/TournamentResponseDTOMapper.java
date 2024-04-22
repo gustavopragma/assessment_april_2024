@@ -15,6 +15,7 @@ public class TournamentResponseDTOMapper {
                 .salePriceSpectator(tournament.getSalePriceSpectator())
                 .presaleParticipantEndDate(tournament.getPresaleParticipantEndDate())
                 .presaleSpectatorEndDate(tournament.getPresaleSpectatorEndDate())
+                .createdAt(tournament.getCreatedAt())
                 .ownerId(tournament.getOwnerId())
                 .videogame(VideogameResponseDTOMapper.toDTO(tournament.getVideogame()))
                 .category(CategoryResponseDTOMapper.toDTO(tournament.getCategory()))
