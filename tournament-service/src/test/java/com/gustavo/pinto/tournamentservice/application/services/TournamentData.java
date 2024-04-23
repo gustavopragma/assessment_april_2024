@@ -4,6 +4,7 @@ import com.gustavo.pinto.tournamentservice.application.dtos.CreateTournamentDTO;
 import com.gustavo.pinto.tournamentservice.domain.models.Tournament;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class TournamentData {
     public static CreateTournamentDTO createTournamentDTO = CreateTournamentDTO.builder()
@@ -24,6 +25,7 @@ public class TournamentData {
         tournament.setName("Tournament 1");
         tournament.setCategory(CategoryData.createCategory());
         tournament.setVideogame(VideogameData.createVideogame());
+        tournament.setStreamings(List.of(StreamingData.createStreaming()));
         return tournament;
     }
 }
