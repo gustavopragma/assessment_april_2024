@@ -1,0 +1,297 @@
+{
+	"info": {
+		"_postman_id": "3e254c50-05aa-46b6-bbf9-0f3ed8a394e4",
+		"name": "tournament-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34200165"
+	},
+	"item": [
+		{
+			"name": "create category",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Categoy 1\",\r\n    \"isFree\": true,\r\n    \"participantsLimit\": 30,\r\n    \"spectatorsLimit\": 30,\r\n    \"streamingLimit\": 2,\r\n    \"commissionPercentage\": 20\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/api/v1/categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"v1",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create streaming",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"platform\":\"twitch\",\r\n    \"url\":\"www.twitch.com\",\r\n    \"tournamentId\":\"e4604548-3b36-4359-a00d-1a14f0872cd7\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/api/v1/streamings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"v1",
+						"streamings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create videogame",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Videogame 1\",\r\n    \"numberPlayers\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/api/v1/videogames",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"v1",
+						"videogames"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create tournament",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Tournament 1\",\r\n    \"participantsLimit\": 30,\r\n    \"presalePriceParticipant\": 20500,\r\n    \"salePriceParticipant\": 25500,\r\n    \"presalePriceSpectator\": 20500,\r\n    \"salePriceSpectator\": 25500,\r\n    \"presaleParticipantEndDate\": \"2024-05-05\",\r\n    \"presaleSpectatorEndDate\": \"2024-05-20\",\r\n    \"ownerId\": \"123456\",\r\n    \"categoryId\": \"77b8a367-6091-409f-a42f-33f497cac8c3\",\r\n    \"videogameId\": \"401347c1-985b-409d-a363-5deec8c5ded6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/api/v1/tournaments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"v1",
+						"tournaments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get categories",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/api/v1/categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"v1",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get videogames",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/api/v1/videogames",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"v1",
+						"videogames"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get tournament",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/api/v1/tournaments/7447f4a3-834a-45b6-8b1c-c1b55f1554fe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"v1",
+						"tournaments",
+						"7447f4a3-834a-45b6-8b1c-c1b55f1554fe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get tournaments by owner",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/api/v1/tournaments/users/123456",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"v1",
+						"tournaments",
+						"users",
+						"123456"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "8ab825be-22e4-4cb1-9aca-e4f454fea616",
+		"name": "middleware-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34200165"
+	},
+	"item": [
+		{
+			"name": "login user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "requestId",
+						"value": "{{$guid}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\": \"tavo\",\r\n    \"Password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/v1/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "requestId",
+						"value": "{{$guid}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\": \"tavo\",\r\n    \"Email\": \"tavo@email.com\",\r\n    \"Password\": \"password\",\r\n    \"FirstName\": \"Gustavo\",\r\n    \"LastName\": \"Pinto\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/v1/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

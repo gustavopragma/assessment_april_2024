@@ -1,0 +1,370 @@
+{
+	"info": {
+		"_postman_id": "117d7219-1240-4d40-b3a0-bf267afab781",
+		"name": "ticket-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34200165"
+	},
+	"item": [
+		{
+			"name": "create participant ticket",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tournamentId\": \"1\",\r\n    \"clientId\": \"129\",\r\n    \"price\": 15000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/v1/participant-tickets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"participant-tickets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create client",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"documentNumber\": \"1\",\r\n    \"email\": \"tavo@email.com\",\r\n    \"name\": \"tavo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/v1/clients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create spectator ticket",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tournamentId\": \"1\",\r\n    \"streamingId\": \"22\",\r\n    \"clientId\": \"123\",\r\n    \"price\": 20000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/v1/spectator-tickets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"spectator-tickets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get client by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"documentNumber\": \"1\",\r\n    \"email\": \"tavo@email.com\",\r\n    \"name\": \"gustavo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/v1/clients/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"clients",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get participant ticket by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/v1/participant-tickets/661d61896d6d7b3c77a4bdc3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"participant-tickets",
+						"661d61896d6d7b3c77a4bdc3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get participant total sales",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/v1/participant-tickets/total-sales/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"participant-tickets",
+						"total-sales",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get spectator total sales",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/v1/spectator-tickets/total-sales/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"spectator-tickets",
+						"total-sales",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get total participants",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/v1/participant-tickets/total-participants/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"participant-tickets",
+						"total-participants",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get total spectators",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/v1/spectator-tickets/total-participants/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"spectator-tickets",
+						"total-participants",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get spectator ticket by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/v1/spectator-tickets/66240063622bd16118c89c9c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"spectator-tickets",
+						"66240063622bd16118c89c9c"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
