@@ -1,7 +1,7 @@
 services:
   auth-service:
     container_name: auth-service
-    image: gpinto/auth-service:1.0.0
+    image: tavopragma/auth-service:1.0.0
     restart: on-failure
     environment:
       - DATABASE_URL=jdbc:postgresql://auth-service-db:5432/auth
@@ -16,7 +16,7 @@ services:
       - zipkin
   tournament-service:
     container_name: tournament-service
-    image: gpinto/tournament-service:1.0.0
+    image: tavopragma/tournament-service:1.0.0
     restart: on-failure
     environment:
       - DATABASE_URL=jdbc:postgresql://tournament-service-db:5432/tournament
@@ -33,7 +33,7 @@ services:
       - zipkin
   middleware-service:
     container_name: middleware-service
-    image: gpinto/middleware-service:1.0.0
+    image: tavopragma/middleware-service:1.0.0
     restart: on-failure
     environment:
       - AUTH_SERVICE_URL=http://auth-service:8080/api/v1/auth
@@ -44,7 +44,7 @@ services:
       - auth-service
   notification-service:
     container_name: notification-service
-    image: gpinto/notification-service:1.0.0
+    image: tavopragma/notification-service:1.0.0
     restart: on-failure
     environment:
       - DATABASE_HOST=notification-service-db
@@ -70,7 +70,7 @@ services:
       - zipkin
   ticket-service:
     container_name: ticket-service
-    image: gpinto/ticket-service:1.0.0
+    image: tavopragma/ticket-service:1.0.0
     restart: on-failure
     environment:
       - DATABASE_HOST=ticket-service-db
