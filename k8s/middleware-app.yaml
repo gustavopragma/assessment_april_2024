@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: middleware-app
-        image: gpinto/middleware-service:1.0.0
+        image: tavopragma/middleware-service:1.0.0
         ports:
         - containerPort: 8080
         envFrom:

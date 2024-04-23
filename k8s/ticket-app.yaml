@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: ticket-app
-        image: gpinto/ticket-service:1.0.0
+        image: tavopragma/ticket-service:1.0.0
         ports:
         - containerPort: 8080
         envFrom:

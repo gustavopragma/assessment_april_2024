@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: tournament-app
-        image: gpinto/tournament-service:1.0.0
+        image: tavopragma/tournament-service:1.0.0
         ports:
         - containerPort: 8080
         envFrom:

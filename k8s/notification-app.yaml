@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: notification-app
-        image: gpinto/notification-service:1.0.0
+        image: tavopragma/notification-service:1.0.0
         ports:
         - containerPort: 8080
         envFrom:
