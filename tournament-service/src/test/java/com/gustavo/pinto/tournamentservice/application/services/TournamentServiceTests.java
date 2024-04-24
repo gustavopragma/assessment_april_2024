@@ -1,6 +1,7 @@
 package com.gustavo.pinto.tournamentservice.application.services;
 
 import com.gustavo.pinto.tournamentservice.application.dtos.CreateTournamentDTO;
+import com.gustavo.pinto.tournamentservice.domain.exceptions.BadRequestException;
 import com.gustavo.pinto.tournamentservice.domain.exceptions.NotFoundException;
 import com.gustavo.pinto.tournamentservice.domain.models.Tournament;
 import com.gustavo.pinto.tournamentservice.domain.repositories.CategoryRepository;
@@ -56,16 +57,33 @@ public class TournamentServiceTests {
     }
 
     @Test
+    public void testCreateTournamentIfFreeExceed() {
+        //Given
+        Mockito.when(categoryRepository.getCategoryById("1")).thenReturn(Optional.of(CategoryData.createCategory()));
+        Mockito.when(videogameRepository.getVideogameById("1")).thenReturn(Optional.of(VideogameData.createVideogame()));
+        Mockito.when(tournamentRepository.getTotalFreeTournaments("123")).thenReturn(2);
+        //Then
+        assertThatThrownBy(() -> {
+            tournamentService.createTournament(TournamentData.createTournamentDTO);
+        }).isInstanceOf(BadRequestException.class);
+        Mockito.verify(categoryRepository, Mockito.times(1)).getCategoryById("1");
+        Mockito.verify(videogameRepository, Mockito.times(1)).getVideogameById("1");
+        Mockito.verify(tournamentRepository, Mockito.times(1)).getTotalFreeTournaments("123");
+    }
+
+    @Test
     public void testCreateTournamentSuccessfully() {
         //Given
         Mockito.when(categoryRepository.getCategoryById("1")).thenReturn(Optional.of(CategoryData.createCategory()));
         Mockito.when(videogameRepository.getVideogameById("1")).thenReturn(Optional.of(VideogameData.createVideogame()));
+        Mockito.when(tournamentRepository.getTotalFreeTournaments("123")).thenReturn(0);
         //When
         tournamentService.createTournament(TournamentData.createTournamentDTO);
         //Then
         Mockito.verify(categoryRepository, Mockito.times(1)).getCategoryById("1");
         Mockito.verify(videogameRepository, Mockito.times(1)).getVideogameById("1");
         Mockito.verify(tournamentRepository, Mockito.times(1)).createTournament(Mockito.any(Tournament.class));
+        Mockito.verify(tournamentRepository, Mockito.times(1)).getTotalFreeTournaments("123");
     }
 
     @Test

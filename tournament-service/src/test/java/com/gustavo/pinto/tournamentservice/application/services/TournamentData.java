@@ -16,6 +16,7 @@ public class TournamentData {
             .presalePriceSpectator(15000f)
             .salePriceParticipant(25000f)
             .salePriceSpectator(20000f)
+            .ownerId("123")
             .videogameId("1")
             .presaleSpectatorEndDate(LocalDate.of(2024, 5, 1))
             .build();
@@ -23,6 +24,7 @@ public class TournamentData {
     public static Tournament createTournament() {
         Tournament tournament = new Tournament();
         tournament.setName("Tournament 1");
+        tournament.setOwnerId("123");
         tournament.setCategory(CategoryData.createCategory());
         tournament.setVideogame(VideogameData.createVideogame());
         tournament.setStreamings(List.of(StreamingData.createStreaming()));
