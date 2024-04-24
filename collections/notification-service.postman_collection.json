@@ -22,12 +22,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8084/api/v1/notifications?tournamentId=1&ticketType=participant",
+					"raw": "http://localhost{{host}}/api/v1/notifications?tournamentId=1&ticketType=participant",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"localhost{{host}}"
 					],
-					"port": "8084",
 					"path": [
 						"api",
 						"v1",

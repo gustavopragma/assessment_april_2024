@@ -31,12 +31,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8082/api/v1/participant-tickets",
+					"raw": "http://{{host}}/api/v1/participant-tickets",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "8082",
 					"path": [
 						"api",
 						"v1",
@@ -71,12 +70,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8082/api/v1/clients",
+					"raw": "http://{{host}}/api/v1/clients",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "8082",
 					"path": [
 						"api",
 						"v1",
@@ -111,12 +109,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8082/api/v1/spectator-tickets",
+					"raw": "http://{{host}}/api/v1/spectator-tickets",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "8082",
 					"path": [
 						"api",
 						"v1",
@@ -154,12 +151,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8082/api/v1/clients/1",
+					"raw": "http://{{host}}/api/v1/clients/1",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "8082",
 					"path": [
 						"api",
 						"v1",
@@ -186,12 +182,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8082/api/v1/participant-tickets/661d61896d6d7b3c77a4bdc3",
+					"raw": "http://{{host}}/api/v1/participant-tickets/661d61896d6d7b3c77a4bdc3",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "8082",
 					"path": [
 						"api",
 						"v1",
@@ -218,12 +213,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8082/api/v1/participant-tickets/total-sales/1",
+					"raw": "http://{{host}}/api/v1/participant-tickets/total-sales/1",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "8082",
 					"path": [
 						"api",
 						"v1",
@@ -251,12 +245,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8082/api/v1/spectator-tickets/total-sales/1",
+					"raw": "http://{{host}}/api/v1/spectator-tickets/total-sales/1",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "8082",
 					"path": [
 						"api",
 						"v1",
@@ -284,12 +277,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8082/api/v1/participant-tickets/total-participants/1",
+					"raw": "http://{{host}}/api/v1/participant-tickets/total-participants/1",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "8082",
 					"path": [
 						"api",
 						"v1",
@@ -317,12 +309,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8082/api/v1/spectator-tickets/total-participants/1",
+					"raw": "http://{{host}}/api/v1/spectator-tickets/total-participants/1",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "8082",
 					"path": [
 						"api",
 						"v1",
@@ -350,12 +341,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8082/api/v1/spectator-tickets/66240063622bd16118c89c9c",
+					"raw": "http://{{host}}/api/v1/spectator-tickets/66240063622bd16118c89c9c",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "8082",
 					"path": [
 						"api",
 						"v1",

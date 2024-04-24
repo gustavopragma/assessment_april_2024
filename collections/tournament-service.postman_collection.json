@@ -31,12 +31,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8083/api/v1/categories",
+					"raw": "http://{{host}}/api/v1/categories",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "8083",
 					"path": [
 						"api",
 						"v1",
@@ -71,12 +70,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8083/api/v1/streamings",
+					"raw": "http://{{host}}/api/v1/streamings",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "8083",
 					"path": [
 						"api",
 						"v1",
@@ -111,12 +109,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8083/api/v1/videogames",
+					"raw": "http://{{host}}/api/v1/videogames",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "8083",
 					"path": [
 						"api",
 						"v1",
@@ -151,12 +148,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8083/api/v1/tournaments",
+					"raw": "http://{{host}}/api/v1/tournaments",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "8083",
 					"path": [
 						"api",
 						"v1",
@@ -182,12 +178,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8083/api/v1/categories",
+					"raw": "http://{{host}}/api/v1/categories",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "8083",
 					"path": [
 						"api",
 						"v1",
@@ -213,12 +208,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8083/api/v1/videogames",
+					"raw": "http://{{host}}/api/v1/videogames",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "8083",
 					"path": [
 						"api",
 						"v1",
@@ -244,12 +238,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8083/api/v1/tournaments/7447f4a3-834a-45b6-8b1c-c1b55f1554fe",
+					"raw": "http://{{host}}/api/v1/tournaments/7447f4a3-834a-45b6-8b1c-c1b55f1554fe",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "8083",
 					"path": [
 						"api",
 						"v1",
@@ -276,12 +269,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8083/api/v1/tournaments/users/123456",
+					"raw": "http://{{host}}/api/v1/tournaments/users/123456",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "8083",
 					"path": [
 						"api",
 						"v1",
