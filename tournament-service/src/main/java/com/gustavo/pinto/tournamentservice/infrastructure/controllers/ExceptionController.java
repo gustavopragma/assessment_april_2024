@@ -1,5 +1,6 @@
 package com.gustavo.pinto.tournamentservice.infrastructure.controllers;
 
+import com.gustavo.pinto.tournamentservice.domain.exceptions.BadRequestException;
 import com.gustavo.pinto.tournamentservice.domain.exceptions.NotFoundException;
 import com.gustavo.pinto.tournamentservice.infrastructure.dtos.ErrorInfoDTO;
 import com.gustavo.pinto.tournamentservice.infrastructure.dtos.ErrorResponseDTO;
@@ -35,9 +36,22 @@ public class ExceptionController {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
-    public ErrorResponseDTO handleUserNotFoundException(NotFoundException ex, HttpServletRequest httpServletRequest) {
+    public ErrorResponseDTO handleNotFoundException(NotFoundException ex, HttpServletRequest httpServletRequest) {
         ErrorResponseDTO errorResponseDTO = ErrorResponseDTO.builder()
                 .statusCode("404")
+                .build();
+        ErrorInfoDTO errorInfoDTO = ErrorInfoDTO.builder()
+                .message(ex.getMessage())
+                .build();
+        errorResponseDTO.setErrors(List.of(errorInfoDTO));
+        return errorResponseDTO;
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(BadRequestException.class)
+    public ErrorResponseDTO handleBadRequestException(BadRequestException ex, HttpServletRequest httpServletRequest) {
+        ErrorResponseDTO errorResponseDTO = ErrorResponseDTO.builder()
+                .statusCode("400")
                 .build();
         ErrorInfoDTO errorInfoDTO = ErrorInfoDTO.builder()
                 .message(ex.getMessage())

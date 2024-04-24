@@ -41,4 +41,9 @@ public class TournamentRepositoryImpl implements TournamentRepository {
                 .map(TournamentEntityMapper::toModel)
                 .toList();
     }
+
+    @Override
+    public Integer getTotalFreeTournaments(String ownerId) {
+        return tournamentEntityRepository.findByOwnerIdAndAndCategoryEntityIsFree(ownerId, true).size();
+    }
 }

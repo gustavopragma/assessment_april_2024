@@ -8,6 +8,6 @@ import java.util.Optional;
 public interface TournamentRepository {
     String createTournament(Tournament tournament);
     Optional<Tournament> getTournamentById(String id);
-
     List<Tournament> getTournamentsByOwnerId(String ownerId);
+    Integer getTotalFreeTournaments(String ownerId);
 }

@@ -4,6 +4,7 @@ import com.gustavo.pinto.tournamentservice.application.dtos.*;
 import com.gustavo.pinto.tournamentservice.application.mappers.CreateTournamentDTOMapper;
 import com.gustavo.pinto.tournamentservice.application.mappers.TournamentListResponseDTOMapper;
 import com.gustavo.pinto.tournamentservice.application.mappers.TournamentResponseDTOMapper;
+import com.gustavo.pinto.tournamentservice.domain.exceptions.BadRequestException;
 import com.gustavo.pinto.tournamentservice.domain.exceptions.NotFoundException;
 import com.gustavo.pinto.tournamentservice.domain.models.Category;
 import com.gustavo.pinto.tournamentservice.domain.models.Tournament;
@@ -34,6 +35,9 @@ public class TournamentService {
         if (optionalCategory.isEmpty()) throw new NotFoundException("Category does not exists");
         Optional<Videogame> optionalVideogame = videogameRepository.getVideogameById(createTournamentDTO.getVideogameId());
         if (optionalVideogame.isEmpty()) throw new NotFoundException(("Videogame does not exists"));
+        Category category = optionalCategory.get();
+        Integer totalFreeTournaments = tournamentRepository.getTotalFreeTournaments(createTournamentDTO.getOwnerId());
+        if(category.getIsFree() && totalFreeTournaments >= 2) throw new BadRequestException("Free tournament limit exceed");
         Tournament tournament = CreateTournamentDTOMapper.toModel(createTournamentDTO);
         tournament.setActivate(true);
         tournament.setCreatedAt(LocalDate.now());

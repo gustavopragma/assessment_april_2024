@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface TournamentEntityRepository extends JpaRepository<TournamentEntity, String> {
     List<TournamentEntity> findByOwnerId(String ownerId);
+
+    List<TournamentEntity> findByOwnerIdAndAndCategoryEntityIsFree(String ownerId,Boolean isFree);
 }
