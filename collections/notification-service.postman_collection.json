@@ -22,10 +22,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost{{host}}/api/v1/notifications?tournamentId=1&ticketType=participant",
+					"raw": "http://{{host}}/api/v1/notifications?tournamentId=1&ticketType=participant",
 					"protocol": "http",
 					"host": [
-						"localhost{{host}}"
+						"{{host}}"
 					],
 					"path": [
 						"api",
