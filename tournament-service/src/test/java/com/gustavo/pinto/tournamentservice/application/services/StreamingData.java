@@ -10,6 +10,8 @@ public class StreamingData {
             .url("www.twitch.com")
             .build();
 
+
+
     public static Streaming createStreaming() {
         Streaming streaming = new Streaming();
         streaming.setPlatform("Twitch");

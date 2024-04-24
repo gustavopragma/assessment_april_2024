@@ -5,6 +5,7 @@ import com.gustavo.pinto.tournamentservice.application.dtos.CreateStreamingDTO;
 import com.gustavo.pinto.tournamentservice.application.dtos.CreateStreamingResponseDTO;
 import com.gustavo.pinto.tournamentservice.application.mappers.CreateStreamingDTOMapper;
 import com.gustavo.pinto.tournamentservice.application.mappers.CreateTournamentDTOMapper;
+import com.gustavo.pinto.tournamentservice.domain.exceptions.BadRequestException;
 import com.gustavo.pinto.tournamentservice.domain.exceptions.NotFoundException;
 import com.gustavo.pinto.tournamentservice.domain.models.Streaming;
 import com.gustavo.pinto.tournamentservice.domain.models.Tournament;
@@ -27,6 +28,8 @@ public class StreamingService {
     public CreateStreamingResponseDTO createStreaming(CreateStreamingDTO createStreamingDTO) {
         Optional<Tournament> optionalTournament = tournamentRepository.getTournamentById(createStreamingDTO.getTournamentId());
         if(optionalTournament.isEmpty()) throw new NotFoundException(("Tournament does not exists"));
+        Tournament tournament = optionalTournament.get();
+        if(tournament.getStreamings().size() >= tournament.getCategory().getStreamingLimit()) throw new BadRequestException("Streaming limit exceed");
         Streaming streaming = CreateStreamingDTOMapper.toModel(createStreamingDTO);
         streaming.setTournament(optionalTournament.get());
         String id = streamingRepository.createStreaming(streaming);

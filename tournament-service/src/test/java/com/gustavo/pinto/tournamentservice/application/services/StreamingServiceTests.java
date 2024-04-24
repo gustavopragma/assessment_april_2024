@@ -1,7 +1,9 @@
 package com.gustavo.pinto.tournamentservice.application.services;
 
+import com.gustavo.pinto.tournamentservice.domain.exceptions.BadRequestException;
 import com.gustavo.pinto.tournamentservice.domain.exceptions.NotFoundException;
 import com.gustavo.pinto.tournamentservice.domain.models.Streaming;
+import com.gustavo.pinto.tournamentservice.domain.models.Tournament;
 import com.gustavo.pinto.tournamentservice.domain.repositories.StreamingRepository;
 import com.gustavo.pinto.tournamentservice.domain.repositories.TournamentRepository;
 import org.junit.jupiter.api.Test;
@@ -32,6 +34,19 @@ public class StreamingServiceTests {
         assertThatThrownBy(() -> {
             streamingService.createStreaming(StreamingData.createStreamingDTO);
         }).isInstanceOf(NotFoundException.class);
+        Mockito.verify(tournamentRepository, Mockito.times(1)).getTournamentById("1");
+    }
+
+    @Test
+    public void testCreateStreamingIfStreamingsExceed() {
+        //Given
+        Tournament tournament = TournamentData.createTournament();
+        tournament.getCategory().setStreamingLimit(1);
+        Mockito.when(tournamentRepository.getTournamentById("1")).thenReturn(Optional.of(tournament));
+        //Then
+        assertThatThrownBy(() -> {
+            streamingService.createStreaming(StreamingData.createStreamingDTO);
+        }).isInstanceOf(BadRequestException.class);
         Mockito.verify(tournamentRepository, Mockito.times(1)).getTournamentById("1");
     }
 
