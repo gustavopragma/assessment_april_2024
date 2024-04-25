@@ -5,7 +5,6 @@ import com.gustavo.pinto.authservice.application.dtos.LoginUserDTO;
 import com.gustavo.pinto.authservice.application.dtos.TokenResponseDTO;
 import com.gustavo.pinto.authservice.application.mappers.CreateRequestDTOMapper;
 import com.gustavo.pinto.authservice.domain.exceptions.BadRequestException;
-import com.gustavo.pinto.authservice.domain.exceptions.InvalidCredentialsException;
 import com.gustavo.pinto.authservice.domain.exceptions.NotFoundException;
 import com.gustavo.pinto.authservice.domain.models.User;
 import com.gustavo.pinto.authservice.domain.repositories.UserRepository;
@@ -44,7 +43,7 @@ public class UserService {
 
     public TokenResponseDTO login(LoginUserDTO loginUserDTO) {
         User user = getUserByUsername(loginUserDTO.getUsername());
-        if(!passwordEncoder.matches(loginUserDTO.getPassword(), user.getPassword())) throw new InvalidCredentialsException("Invalid credentials");
+        if(!passwordEncoder.matches(loginUserDTO.getPassword(), user.getPassword())) throw new BadRequestException("Invalid credentials");
         String token = jwtUtils.createJWT(user);
         return TokenResponseDTO.builder()
                 .token(token)

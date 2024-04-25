@@ -1,7 +1,6 @@
 package com.gustavo.pinto.authservice.application.services;
 
 import com.gustavo.pinto.authservice.domain.exceptions.BadRequestException;
-import com.gustavo.pinto.authservice.domain.exceptions.InvalidCredentialsException;
 import com.gustavo.pinto.authservice.domain.exceptions.NotFoundException;
 import com.gustavo.pinto.authservice.domain.models.User;
 import com.gustavo.pinto.authservice.domain.repositories.UserRepository;
@@ -113,7 +112,7 @@ public class UserServiceTests {
         //When
         Assertions.assertThatThrownBy(() -> {
             userService.login(UserData.loginUserDTO);
-        }).isInstanceOf(InvalidCredentialsException.class);
+        }).isInstanceOf(BadRequestException.class);
         //Then
         Mockito.verify(userRepository, Mockito.times(1)).getUserByUsername("tavo");
         Mockito.verify(passwordEncoder, Mockito.times(1)).matches("123", "123");

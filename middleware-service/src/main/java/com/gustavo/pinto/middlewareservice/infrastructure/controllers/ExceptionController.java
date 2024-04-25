@@ -1,5 +1,6 @@
 package com.gustavo.pinto.middlewareservice.infrastructure.controllers;
 
+import com.gustavo.pinto.middlewareservice.domain.exceptions.BadRequestException;
 import com.gustavo.pinto.middlewareservice.domain.exceptions.InternalServerError;
 import com.gustavo.pinto.middlewareservice.domain.exceptions.NotFoundException;
 import com.gustavo.pinto.middlewareservice.infrastructure.dtos.ErrorInfoDTO;
@@ -34,6 +35,19 @@ public class ExceptionController {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
     public ErrorResponseDTO handleUserNotFoundException(NotFoundException ex, HttpServletRequest httpServletRequest) {
+        ErrorResponseDTO errorResponseDTO = ErrorResponseDTO.builder()
+                .statusCode("404")
+                .build();
+        ErrorInfoDTO errorInfoDTO = ErrorInfoDTO.builder()
+                .message(ex.getMessage())
+                .build();
+        errorResponseDTO.setErrors(List.of(errorInfoDTO));
+        return errorResponseDTO;
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(BadRequestException.class)
+    public ErrorResponseDTO handleBadRequestException(BadRequestException ex, HttpServletRequest httpServletRequest) {
         ErrorResponseDTO errorResponseDTO = ErrorResponseDTO.builder()
                 .statusCode("404")
                 .build();

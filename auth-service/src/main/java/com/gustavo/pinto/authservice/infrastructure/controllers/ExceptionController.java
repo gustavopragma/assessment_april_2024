@@ -1,7 +1,6 @@
 package com.gustavo.pinto.authservice.infrastructure.controllers;
 
 import com.gustavo.pinto.authservice.domain.exceptions.BadRequestException;
-import com.gustavo.pinto.authservice.domain.exceptions.InvalidCredentialsException;
 import com.gustavo.pinto.authservice.domain.exceptions.NotFoundException;
 import com.gustavo.pinto.authservice.infrastructure.dtos.ErrorInfoDTO;
 import com.gustavo.pinto.authservice.infrastructure.dtos.ErrorResponseDTO;
@@ -35,19 +34,6 @@ public class ExceptionController {
         return errorResponseDTO;
     }
 
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    @ExceptionHandler(InvalidCredentialsException.class)
-    public ErrorResponseDTO handleInvalidCredentialsException(InvalidCredentialsException ex, HttpServletRequest httpServletRequest) {
-        ErrorResponseDTO errorResponseDTO = ErrorResponseDTO.builder()
-                .statusCode("401")
-                .build();
-        ErrorInfoDTO errorInfoDTO = ErrorInfoDTO.builder()
-                .message("Invalid credentials")
-                .build();
-        errorResponseDTO.setErrors(List.of(errorInfoDTO));
-        return errorResponseDTO;
-    }
-
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
     public ErrorResponseDTO handleUserNotFoundException(NotFoundException ex, HttpServletRequest httpServletRequest) {
@@ -63,7 +49,7 @@ public class ExceptionController {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(BadRequestException.class)
-    public ErrorResponseDTO handleUserNotFoundException(BadRequestException ex, HttpServletRequest httpServletRequest) {
+    public ErrorResponseDTO handleBadRequestException(BadRequestException ex, HttpServletRequest httpServletRequest) {
         ErrorResponseDTO errorResponseDTO = ErrorResponseDTO.builder()
                 .statusCode("404")
                 .build();
