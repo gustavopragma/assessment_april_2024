@@ -51,7 +51,7 @@ public class ExceptionController {
     @ExceptionHandler(BadRequestException.class)
     public ErrorResponseDTO handleBadRequestException(BadRequestException ex, HttpServletRequest httpServletRequest) {
         ErrorResponseDTO errorResponseDTO = ErrorResponseDTO.builder()
-                .statusCode("404")
+                .statusCode("400")
                 .build();
         ErrorInfoDTO errorInfoDTO = ErrorInfoDTO.builder()
                 .message(ex.getMessage())
