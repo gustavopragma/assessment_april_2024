@@ -13,23 +13,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication(exclude = {UserDetailsServiceAutoConfiguration.class})
 @EnableFeignClients
 public class TicketServiceApplication {
-	private final RabbitNotificationProducer rabbitNotificationProducer;
-
-	public TicketServiceApplication(RabbitNotificationProducer rabbitNotificationProducer) {
-		this.rabbitNotificationProducer = rabbitNotificationProducer;
-	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(TicketServiceApplication.class, args);
-	}
-
-	@Bean
-	public CommandLineRunner applicationRunner() {
-		return args -> {
-/*			NotificationDTO notificationDTO = NotificationDTO.builder()
-					.ticketId("ffff")
-					.build();
-			rabbitNotificationProducer.sendNotification(notificationDTO);*/
-		};
 	}
 }
