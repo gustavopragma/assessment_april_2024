@@ -1,9 +1,9 @@
 package com.gustavo.pinto.authservice.domain.exceptions;
 
-public class InvalidCredentialsException extends RuntimeException {
+public class BadRequestException extends RuntimeException{
     private final String message;
 
-    public InvalidCredentialsException(String message) {
+    public BadRequestException(String message) {
         this.message = message;
     }
 

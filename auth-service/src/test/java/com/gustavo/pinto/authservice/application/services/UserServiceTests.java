@@ -1,15 +1,15 @@
 package com.gustavo.pinto.authservice.application.services;
 
-import com.gustavo.pinto.authservice.application.mappers.CreateRequestDTOMapper;
+import com.gustavo.pinto.authservice.domain.exceptions.BadRequestException;
 import com.gustavo.pinto.authservice.domain.exceptions.InvalidCredentialsException;
 import com.gustavo.pinto.authservice.domain.exceptions.NotFoundException;
 import com.gustavo.pinto.authservice.domain.models.User;
 import com.gustavo.pinto.authservice.domain.repositories.UserRepository;
 import com.gustavo.pinto.authservice.infrastructure.utils.JWTUtils;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -28,26 +28,47 @@ public class UserServiceTests {
     @Mock
     private PasswordEncoder passwordEncoder;
 
+    @InjectMocks
     private UserService userService;
 
-    @BeforeEach
-    void setUp() {
-        userService = new UserService(
-                jwtUtils,
-                userRepository,
-                new CreateRequestDTOMapper(),
-                passwordEncoder
-        );
+    @Test
+    public void testCreateUserIfUsernameExists() {
+        //Given
+        Mockito.when(userRepository.usernameExists("tavo")).thenReturn(true);
+        //When
+        Assertions.assertThatThrownBy(() -> {
+            userService.createUser(UserData.createUserRequestDTO);
+        }).isInstanceOf(BadRequestException.class);
+        //Then
+        Mockito.verify(userRepository, Mockito.times(1)).usernameExists("tavo");
+    }
+
+    @Test
+    public void testCreateUserIfEmailExists() {
+        //Given
+        Mockito.when(userRepository.usernameExists("tavo")).thenReturn(false);
+        Mockito.when(userRepository.emailExists("tavo@email.com")).thenReturn(true);
+        //When
+        Assertions.assertThatThrownBy(() -> {
+            userService.createUser(UserData.createUserRequestDTO);
+        }).isInstanceOf(BadRequestException.class);
+        //Then
+        Mockito.verify(userRepository, Mockito.times(1)).usernameExists("tavo");
+        Mockito.verify(userRepository, Mockito.times(1)).emailExists("tavo@email.com");
     }
 
     @Test
     public void testCreateUserSuccessfully() {
         //Given
+        Mockito.when(userRepository.usernameExists("tavo")).thenReturn(false);
+        Mockito.when(userRepository.emailExists("tavo@email.com")).thenReturn(false);
         Mockito.when(passwordEncoder.encode("123")).thenReturn("123");
         //When
         userService.createUser(UserData.createUserRequestDTO);
         //Then
         Mockito.verify(userRepository, Mockito.times(1)).createUser(Mockito.any(User.class));
+        Mockito.verify(userRepository, Mockito.times(1)).usernameExists("tavo");
+        Mockito.verify(userRepository, Mockito.times(1)).emailExists("tavo@email.com");
     }
 
     @Test

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CreateRequestDTOMapper {
-    public User toEntity(CreateUserRequestDTO createUserRequestDTO){
+    public static User toEntity(CreateUserRequestDTO createUserRequestDTO){
         User user = new User();
         user.setEmail(createUserRequestDTO.getEmail());
         user.setFirstName(createUserRequestDTO.getFirstName());

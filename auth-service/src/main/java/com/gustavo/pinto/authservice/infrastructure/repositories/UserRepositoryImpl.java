@@ -11,21 +11,29 @@ import java.util.Optional;
 @Repository
 public class UserRepositoryImpl implements UserRepository {
     private final UserEntityRepository userEntityRepository;
-    private final UserEntityMapper userEntityMapper;
 
-    public UserRepositoryImpl(UserEntityRepository userEntityRepository, UserEntityMapper userEntityMapper) {
+    public UserRepositoryImpl(UserEntityRepository userEntityRepository) {
         this.userEntityRepository = userEntityRepository;
-        this.userEntityMapper = userEntityMapper;
     }
 
     @Override
     public Optional<User> getUserByUsername(String username) {
-        return userEntityRepository.findByUsername(username).map(userEntityMapper::toModel);
+        return userEntityRepository.findByUsername(username).map(UserEntityMapper::toModel);
     }
 
     @Override
     public void createUser(User user) {
-        UserEntity userEntity = userEntityMapper.toEntity(user);
+        UserEntity userEntity = UserEntityMapper.toEntity(user);
         userEntityRepository.save(userEntity);
+    }
+
+    @Override
+    public Boolean usernameExists(String username) {
+        return userEntityRepository.existsByUsername(username);
+    }
+
+    @Override
+    public Boolean emailExists(String email) {
+        return userEntityRepository.existsByEmail(email);
     }
 }

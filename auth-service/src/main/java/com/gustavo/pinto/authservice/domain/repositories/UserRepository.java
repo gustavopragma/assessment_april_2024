@@ -7,4 +7,7 @@ import java.util.Optional;
 public interface UserRepository {
     Optional<User> getUserByUsername(String username);
     void createUser(User user);
+
+    Boolean usernameExists(String username);
+    Boolean emailExists(String email);
 }
