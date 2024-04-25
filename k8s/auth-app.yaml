@@ -29,6 +29,7 @@ spec:
       containers:
       - name: auth-app
         image: tavopragma/auth-service:1.0.0
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         envFrom:

@@ -5,6 +5,7 @@ metadata:
 spec:
   selector:
     app: rabbit-app
+  type: NodePort
   ports:
     - name: app
       protocol: TCP
@@ -14,6 +15,7 @@ spec:
       protocol: TCP
       port: 15672
       targetPort: 15672
+      nodePort: 30001
 ---
 apiVersion: apps/v1
 kind: Deployment

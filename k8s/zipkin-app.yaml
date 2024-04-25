@@ -5,10 +5,12 @@ metadata:
 spec:
   selector:
     app: zipkin-app
+  type: NodePort
   ports:
     - protocol: TCP
       port: 9411
       targetPort: 9411
+      nodePort: 30000
 ---
 apiVersion: apps/v1
 kind: Deployment
